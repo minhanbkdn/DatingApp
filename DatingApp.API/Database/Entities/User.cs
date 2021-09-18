@@ -1,9 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DatingApp.DatingApp.API.Database.Entities
+namespace DatingApp.API.Database.Entities
 {
-    [Table("User")]
     public class User
     {
         [Key]

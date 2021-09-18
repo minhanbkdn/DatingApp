@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using DatingApp.DatingApp.API.Database;
-using DatingApp.DatingApp.API.Database.Entities;
+using DatingApp.API.Database;
+using DatingApp.API.Database.Entities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DatingApp.DatingApp.API.Controllers
+namespace DatingApp.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
