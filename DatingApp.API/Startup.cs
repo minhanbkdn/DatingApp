@@ -1,7 +1,6 @@
-using DatingApp.API.Database;
+using DatingApp.API.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -31,17 +30,9 @@ namespace DatingApp.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DatingApp.API", Version = "v1" });
             });
 
-            var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(connectionString));
+            services.AddApplicationServices(Configuration);
 
-            // Init Database using MySQL
-            // "DefaultConnection": "server=localhost;user=root;password=YourPassword;database=UserDb"
-            // services.AddDbContext<DataContext>(options =>
-            //     options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 25)))
-            //     .EnableSensitiveDataLogging() // <-- These two calls are optional but help
-            //     .EnableDetailedErrors()       // <-- with debugging (remove for production).
-            // );
+            services.AddIdentityServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +50,8 @@ namespace DatingApp.API
             app.UseRouting();
 
             app.UseCors("CorsPolicy");
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

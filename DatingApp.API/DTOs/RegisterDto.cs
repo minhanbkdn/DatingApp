@@ -1,22 +1,19 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace DatingApp.API.Database.Entities
+namespace DatingApp.API.DTOs
 {
-    public class User
+    public class RegisterDto
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         [StringLength(32)]
         public string Username { get; set; }
 
         [Required]
         [StringLength(255)]
+        [EmailAddress]
         public string Email { get; set; }
 
-        public byte[] PasswordHash { get; set; }
-
-        public byte[] PasswordSalt { get; set; }
+        [Required]
+        public string Password { get; set; }
     }
 }
