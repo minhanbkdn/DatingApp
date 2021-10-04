@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarTogglerDemo01"
+    aria-controls="navbarTogglerDemo01"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="/">DATING</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="#"
+          >Home <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+    </ul>
+    <form
+      class="form-inline my-2 my-lg-0"
+      *ngIf="!(accountsService.currentUser$ | async)"
+    >
+      <input
+        class="form-control mr-sm-2"
+        type="text"
+        placeholder="Username"
+        name="username"
+        [(ngModel)]="user.username"
+      />
+      <input
+        class="form-control mr-sm-2"
+        type="password"
+        placeholder="Password"
+        name="password"
+        [(ngModel)]="user.password"
+      />
+      <button
+        class="btn btn-success my-2 my-sm-0 mr-sm-2"
+        type="button"
+        (click)="login()"
+      >
+        Login
+      </button>
+      <button class="btn btn-primary my-2 my-sm-0" type="button">
+        Register
+      </button>
+    </form>
+    <ul
+      class="nav navbar-nav navbar-right"
+      *ngIf="accountsService.currentUser$ | async"
+    >
+      <li class="text-light">
+        <a class="nav-link"
+          >Hi, {{ (accountsService.currentUser$ | async)?.username }}</a
+        >
+      </li>
+      <li class="text-light">
+        <a class="nav-link" (click)="accountsService.logout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
