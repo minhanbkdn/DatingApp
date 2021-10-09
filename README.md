@@ -61,5 +61,18 @@
    - Child to parent communication
    - Hooking up register method to the account service
    - Saving code the Source Control
-6. User Management - API
+6. Extend User Management - API
+   - Introduction
+   - Extending the user entity
+   - Adding a DateTime extension to calculate Age
+   - Entity Framework relationships
+   - Seeding data
+   - The repository pattern
+   - Creating a repository
+   - Updating the UsersController
+   - Adding a DTO for Members
+   - Adding AutoMapper
+   - Configuring AutoMapper
+   - Using AutoMapper queryable extensions
+   - Saving code the Source Control
 7. Building User Interface - Angular
