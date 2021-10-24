@@ -13,5 +13,6 @@ namespace DatingApp.API.Database.Repositories
         bool SaveChanges();
         IEnumerable<MemberDto> GetMembers();
         MemberDto GetMemberByUsername(string username);
+        void UpdateProfile(string username, ProfileDto profile);
     }
 }

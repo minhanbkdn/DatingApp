@@ -1,10 +1,16 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DatingApp.API.Database.Entities
 {
     public class User
     {
+        public User()
+        {
+            SourceUsers = new HashSet<UserLike>();
+            LikedUsers = new HashSet<UserLike>();
+        }
         [Key]
         public int Id { get; set; }
 
@@ -48,5 +54,7 @@ namespace DatingApp.API.Database.Entities
             if (DateOfBirth.Date > today.AddYears(-age)) age--;
             return age;
         }
+        public virtual HashSet<UserLike> SourceUsers { get; set; }
+        public virtual HashSet<UserLike> LikedUsers { get; set; }
     }
 }

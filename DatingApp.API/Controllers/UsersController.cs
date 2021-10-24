@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Security.Claims;
 using DatingApp.API.Database.Repositories;
 using DatingApp.API.DTOs;
 using Microsoft.AspNetCore.Authorization;
@@ -11,8 +12,10 @@ namespace DatingApp.API.Controllers
     public class UsersController : BaseApiController
     {
         private readonly IUserRepository _userRepository;
-        public UsersController(IUserRepository userRepository)
+        private readonly IUserLikeRepository _userLikeRepository;
+        public UsersController(IUserRepository userRepository, IUserLikeRepository userLikeRepository)
         {
+            _userLikeRepository = userLikeRepository;
             _userRepository = userRepository;
         }
 
@@ -31,6 +34,24 @@ namespace DatingApp.API.Controllers
                 return NotFound();
             }
             return Ok(member);
+        }
+
+        [HttpPut]
+        public ActionResult Put(ProfileDto profileDto)
+        {
+            var username = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (string.IsNullOrEmpty(username)) return NotFound();
+            _userRepository.UpdateProfile(username, profileDto);
+            if (_userRepository.SaveChanges()) return NoContent();
+            return BadRequest();
+        }
+
+        [HttpPost("{likedUsername}")]
+        public ActionResult Like(string likedUsername)
+        {
+            var sourceUsername = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (_userLikeRepository.LikeUser(sourceUsername, likedUsername)) return NoContent();
+            return BadRequest();
         }
     }
 }

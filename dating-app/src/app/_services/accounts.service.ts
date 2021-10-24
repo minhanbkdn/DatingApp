@@ -50,4 +50,15 @@ export class AccountsService {
         })
       );
   }
+
+  refreshToken() {
+    const userString = localStorage.getItem('userToken');
+    if (!userString) return;
+    const user = JSON.parse(userString);
+    if (user) {
+      this.currentUser.next(user);
+      return;
+    }
+    this.logout();
+  }
 }

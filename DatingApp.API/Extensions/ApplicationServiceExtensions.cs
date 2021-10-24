@@ -14,6 +14,7 @@ namespace DatingApp.API.Extensions
         {
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserLikeRepository, UserLikeRepository>();
             services.AddAutoMapper(typeof(UserMapperProfile).Assembly);
 
             var connectionString = config.GetConnectionString("DefaultConnection");

@@ -57,5 +57,12 @@ namespace DatingApp.API.Database.Repositories
                 .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                 .FirstOrDefault();
         }
+
+        public void UpdateProfile(string username, ProfileDto profile)
+        {
+            var user = GetUserByUsername(username);
+            if (user == null) return;
+            _mapper.Map(profile, user);
+        }
     }
 }

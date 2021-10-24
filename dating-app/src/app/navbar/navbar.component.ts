@@ -8,7 +8,7 @@ import { AccountsService } from '../_services/accounts.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  user: UserLogin = { username: 'anbc', password: 'Pa$$word' };
+  user: UserLogin = { username: 'mscard0', password: 'Pa$$w0rd' };
 
   constructor(public accountsService: AccountsService) {}
 

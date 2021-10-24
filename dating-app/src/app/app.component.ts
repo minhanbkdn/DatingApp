@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
+import { AccountsService } from './_services/accounts.service';
 import { Component, OnInit } from '@angular/core';
-import { User } from './_models/user';
 
 @Component({
   selector: 'app-root',
@@ -8,20 +7,9 @@ import { User } from './_models/user';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'Dating ABC';
-  users: User[] = [];
-
-  constructor(private httpClient: HttpClient) {}
+  constructor(public accountsService: AccountsService) {}
 
   ngOnInit(): void {
-    this.fetchUsers();
-  }
-
-  fetchUsers() {
-    this.httpClient
-      .get('https://localhost:5001/api/users')
-      .subscribe((response) => {
-        this.users = response as User[];
-      });
+    this.accountsService.refreshToken();
   }
 }
